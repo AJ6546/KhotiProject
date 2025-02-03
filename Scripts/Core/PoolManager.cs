@@ -1,6 +1,7 @@
 using KhotiProject.Scripts.Combat.Enum;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace KhotiProject.Scripts.Combat
 {
@@ -46,10 +47,16 @@ namespace KhotiProject.Scripts.Combat
             }
         }
 
+        public GameObject SpawnWeapon(Spawnable tag, Transform weaponHolder)
+        {
+            var weapon = SetInstantiatedObject(tag, weaponHolder.position, weaponHolder.rotation);
+            return weapon;
+        }
+
         public Projectile SpawnProjectile(Spawnable tag, Vector3 position, Quaternion rotation)
         {
-            GameObject obj = SetInstantiatedObject(tag, position, rotation);
-            return obj.GetComponent<Projectile>();
+            var projectile = SetInstantiatedObject(tag, position, rotation);
+            return projectile.GetComponent<Projectile>();
         }
 
         public GameObject SpawnEffect(Spawnable tag, Vector3 position, Quaternion rotation)

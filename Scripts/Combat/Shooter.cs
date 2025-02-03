@@ -13,13 +13,11 @@ public class Shooter : MonoBehaviour
         poolManager = PoolManager.instance;
     }
 
-    void Update()
+    public void Shoot()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            var projectileInstance = poolManager.SpawnProjectile(projectileTag, transform.position, transform.rotation);
-            projectileInstance.SetInstantiator(transform);
-            projectileInstance.SetTarget();
-        }
+        var projectileInstance = poolManager.SpawnProjectile(projectileTag,
+            transform.position, transform.rotation);
+        projectileInstance.SetInstantiator(transform);
+        projectileInstance.SetTarget();
     }
 }

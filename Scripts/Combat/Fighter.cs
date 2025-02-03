@@ -4,14 +4,19 @@ namespace KhotiProject.Scripts.Combat
 {
     public class Fighter : MonoBehaviour
     {
-        [SerializeField] Transform weaponHolder;
-        [SerializeField] Weapon defaultWeapon = null;
+        public PoolManager poolManager;
+
+        [SerializeField] Transform primaryWeaponHolder = null;
+        [SerializeField] Transform secondaryWeaponHolder = null;
+        [SerializeField] Weapon defaultWeapon;
+        [SerializeField] Animator animator = null;
 
         Transform target;
-        Weapon currentWeapon = null;
+        Weapon currentWeapon;
 
         void Start ()
         {
+            poolManager = PoolManager.instance;
             currentWeapon = defaultWeapon;
         }
 
@@ -24,9 +29,10 @@ namespace KhotiProject.Scripts.Combat
             healthComponent.TakeDamage(currentWeapon.GetDamage());
         }
 
-        private void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(Weapon weapon)
         {
             currentWeapon = weapon;
+            weapon.Spawn(primaryWeaponHolder, secondaryWeaponHolder, animator, poolManager);
         }
 
         public void Cancel()

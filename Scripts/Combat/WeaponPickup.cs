@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponPickup : MonoBehaviour
+namespace KhotiProject.Scripts.Combat
 {
-    // Start is called before the first frame update
-    void Start()
+    public class WeaponPickup : MonoBehaviour
     {
-        
-    }
+        [SerializeField] Weapon weapon = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<Picker>())
+            {
+                other.GetComponent<Fighter>().EquipWeapon(weapon);
+                gameObject.SetActive(false);
+            }
+        }
     }
 }
+
